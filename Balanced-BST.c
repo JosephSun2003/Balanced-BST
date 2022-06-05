@@ -36,8 +36,8 @@ BST_node *balance(BST_node *root){
     /**
      * Function Notes:
      * Recusrion can be used, although tail recursion should be done if possible (unlikely will given the algorithm implemented)
-     * post-order operation (left, centre, right)
-     * switching of data, not the node itself (too messy)
+     * Post-order operation (left, centre, right)
+     * Switching of data, not the node itself (too messy)
      */
 
     //go left if it isn't empty
