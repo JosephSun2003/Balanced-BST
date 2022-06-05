@@ -27,3 +27,32 @@ BST_node *new_BST_Node(int input_int){
 
     return new_node;
 }
+
+BST_node *balance(BST_node *root){
+    /**
+     * @brief Balances the BST to ensure optimal search complexity
+     */
+
+    /**
+     * Function Notes:
+     * Recusrion can be used, although tail recursion should be done if possible (unlikely will given the algorithm implemented)
+     * post-order operation (left, centre, right)
+     * switching of data, not the node itself (too messy)
+     */
+
+    //go left if it isn't empty
+    //check left vs. centre
+    //check right if it isn't empty and right vs. centre
+    //go right if it isn't empty
+
+    return root;
+}
+
+BST_node *insert_node(BST_node *root, BST_node *new_node){
+    /**
+     * @brief Insert a made node into the tree
+     * 
+     */
+
+    return root;
+}
