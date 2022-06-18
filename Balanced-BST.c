@@ -46,7 +46,7 @@ BST_node *balance(BST_node *root){
      * Recusrion can be used, although tail recursion should be done if possible (unlikely will given the algorithm implemented)
      * Post-order operation (left, centre, right)
      * Switching of data, not the node itself (too messy)
-     * Assumption of now duplicates
+     * Assumption of no duplicates
      */
 
     //go left if it isn't empty & check left vs. centre
@@ -69,11 +69,48 @@ BST_node *balance(BST_node *root){
     return root;
 }
 
+//Queue System needed for insert
+
+typedef struct Queue_node_struct
+{
+    BST_node *node_ptr;
+    struct Queue_node_struct *next;
+}Queue_node;
+
+Queue_node* new_queue_node(BST_node* BST_node){
+    Queue_node* new = (Queue_node *) calloc(1, sizeof(Queue_node));
+    new->node_ptr = BST_node;
+    new->next = NULL;
+    return new; 
+}
+
+Queue_node* insert_node_queue(Queue_node* root, BST_node* new_BST_Node){
+
+    if(root->next != NULL) root->next = insert_node_queue(root->next, new_BST_Node);
+    else root->next = new_queue_node(new_BST_Node);
+
+    return root;
+}
+
+Queue_node* delete_queue(Queue_node *root){
+    if(root->next != NULL) root->next = delete_queue(root->next);
+    free(root);
+    return NULL;
+}
+
+//end of queue system
+
+
 BST_node *insert_node(BST_node *root, BST_node *new_node){
     /**
      * @brief Insert a made node into the tree
      * 
      */
-
+    /**
+     * Plan:
+     * - Width first search
+     * - make a queue
+     * - check for the first available space from left to right, visually speaking
+     * */
     return root;
 }
