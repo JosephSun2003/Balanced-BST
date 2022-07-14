@@ -73,7 +73,7 @@ BST_node *balance(BST_node *root){
 
 typedef struct Queue_node_struct
 {
-    BST_node *node_ptr;
+    struct BST_node *node_ptr;
     struct Queue_node_struct *next;
 }Queue_node;
 
@@ -98,6 +98,13 @@ Queue_node* delete_queue(Queue_node *root){
     return NULL;
 }
 
+Queue_node* remove(Queue_node *root){
+    Queue_node *old = root;
+    Queue_node* new = root->next;
+    free(old);
+    return new;
+}
+
 //end of queue system
 
 
@@ -112,5 +119,21 @@ BST_node *insert_node(BST_node *root, BST_node *new_node){
      * - make a queue
      * - check for the first available space from left to right, visually speaking
      * */
+    Queue_node *head = new_queue_node(root);
+    BST_node* current = root;
+    while(current->right != NULL && current->left != NULL){
+        head = insert_node_queue(head, current->left);
+        head = insert_node_queue(head, current->right);
+        head = remove(head);
+        current = head->node_ptr;
+    }
+    if(current->right == NULL){
+        current->right = new_node;
+    }
+    else{
+        current->left = new_node;
+    }
+    root = balance(root);
+
     return root;
 }
