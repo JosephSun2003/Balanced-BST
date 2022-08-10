@@ -46,7 +46,7 @@ BST_node *balance(BST_node *root){
      * Recusrion can be used, although tail recursion should be done if possible (unlikely will given the algorithm implemented)
      * Post-order operation (left, centre, right)
      * Switching of data, not the node itself (too messy)
-     * Assumption of no duplicates
+     * Assumption of duplicates
      */
 
     //go left if it isn't empty & check left vs. centre
@@ -127,13 +127,39 @@ BST_node *insert_node(BST_node *root, BST_node *new_node){
         head = remove(head);
         current = head->node_ptr;
     }
-    if(current->right == NULL){
-        current->right = new_node;
+    if(current->left == NULL){
+        current->left = new_node;
     }
     else{
-        current->left = new_node;
+        current->right = new_node;
     }
     root = balance(root);
 
     return root;
+}
+
+BST_node* find_replacement(BST_node* root){
+    /**
+     * @brief find the replacement node (the left most node of the right subtree)
+     */
+    return NULL;
+}
+
+BST_node* find_parent(BST_node* root, BST_node* child){
+    /**
+     * @brief find the node that points to another node
+     * functions similar to the search function
+     */
+    return NULL;
+}
+
+BST_node* delete_BST_node(BST_node* root, int value){
+    /**
+     * @brief Delete a node from the tree (possibly the first found duplicate)
+     * Plan:
+     * - case 1: leaf node delete (both are null)
+     * - case 2: stick node delete (2.1: left null, 2.2: right null)
+     * - case 3: root node delete (balance function will be called)
+     * - check if node exists and its parent
+     */
 }
