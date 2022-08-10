@@ -20,5 +20,17 @@ int main()
 
         scanf("%d",&choice); //input proccessing
         getchar();// deal with  \n
+        
+        if(choice == 1){
+            int value = 0;
+            scanf("Key value of the node: %d", &value);
+            getchar();
+            if(root != NULL){
+                search_for(root, value);
+            }
+            else{
+                printf("error, no tree created, yet.");
+            }
+        }
     }
 }
