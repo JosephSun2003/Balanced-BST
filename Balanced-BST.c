@@ -73,13 +73,13 @@ BST_node *balance(BST_node *root){
 
 typedef struct Queue_node_struct
 {
-    struct BST_node *node_ptr;
+    BST_node* node_ptr;
     struct Queue_node_struct *next;
 }Queue_node;
 
-Queue_node* new_queue_node(BST_node* BST_node){
+Queue_node* new_queue_node(BST_node* input_BST_node){
     Queue_node* new = (Queue_node *) calloc(1, sizeof(Queue_node));
-    new->node_ptr = BST_node;
+    new->node_ptr = input_BST_node;
     new->next = NULL;
     return new; 
 }
@@ -98,7 +98,7 @@ Queue_node* delete_queue(Queue_node *root){
     return NULL;
 }
 
-Queue_node* remove(Queue_node *root){
+Queue_node* remove_queue_node(Queue_node *root){
     Queue_node *old = root;
     Queue_node* new = root->next;
     free(old);
@@ -119,12 +119,12 @@ BST_node *insert_node(BST_node *root, BST_node *new_node){
      * - make a queue
      * - check for the first available space from left to right, visually speaking
      * */
-    Queue_node *head = new_queue_node(root);
+    Queue_node* head = new_queue_node(root);
     BST_node* current = root;
     while(current->right != NULL && current->left != NULL){
         head = insert_node_queue(head, current->left);
         head = insert_node_queue(head, current->right);
-        head = remove(head);
+        head = remove_queue_node(head);
         current = head->node_ptr;
     }
     if(current->left == NULL){
@@ -162,4 +162,5 @@ BST_node* delete_BST_node(BST_node* root, int value){
      * - case 3: root node delete (balance function will be called)
      * - check if node exists and its parent
      */
+    return NULL;
 }

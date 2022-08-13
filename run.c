@@ -1,7 +1,7 @@
 //gonna copy a lot of code from the BST Assignment from CSCA48
 
 #include<string.h>
-#include<Balanced-BST.c>
+#include"Balanced-BST.c"
 
 int main()
 {
@@ -23,14 +23,17 @@ int main()
         
         if(choice == 1){
             int value = 0;
-            scanf("Key value of the node: %d", &value);
+            scanf("Value of the node: %d", &value);
             getchar();
             if(root != NULL){
                 search_for(root, value);
             }
             else{
-                printf("error, no tree created, yet.");
+                printf("error, no tree created, yet. \n");
             }
+        }
+        else{
+            printf("Command does not exist. \n");
         }
     }
 }
