@@ -142,18 +142,20 @@ BST_node* find_replacement(BST_node* root){
     /**
      * @brief find the replacement node (the left most node of the right subtree)
      */
-    return NULL;
+    if(root->left != NULL) return find_replacement(root->left);
+    return root;
 }
 
-BST_node* find_parent(BST_node* root, BST_node* child){
+BST_node* find_parent_node(BST_node* root, BST_node* child_node){
     /**
-     * @brief find the node that points to another node
-     * functions similar to the search function
+     * @brief find the parent node to the given child node
+     * 
      */
+
     return NULL;
 }
 
-BST_node* delete_BST_node(BST_node* root, int value){
+BST_node* delete_BST_node(BST_node* root, int key){
     /**
      * @brief Delete a node from the tree (possibly the first found duplicate)
      * Plan:
@@ -162,5 +164,23 @@ BST_node* delete_BST_node(BST_node* root, int value){
      * - case 3: root node delete (balance function will be called)
      * - check if node exists and its parent
      */
-    return NULL;
+
+    //search section
+    BST_node* to_be_deleted = search_for(root, key);
+    BST_node* parent_node = NULL;
+    if(root != to_be_deleted) parent_node = find_parent_node(root, to_be_deleted);
+    //case 1:
+    if(to_be_deleted->left == NULL && to_be_deleted->right == NULL){
+
+        //unlink from tree
+        if(parent_node != NULL && parent_node->right == to_be_deleted) parent_node->right = NULL;
+        else if(parent_node != NULL) parent_node->left = NULL;
+        else root = NULL;
+
+        //deletion of itself
+        free(to_be_deleted);
+        to_be_deleted = NULL;
+    }
+
+    return root;
 }
