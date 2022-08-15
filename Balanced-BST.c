@@ -152,7 +152,10 @@ BST_node* find_parent_node(BST_node* root, BST_node* child_node){
      * 
      */
 
-    return NULL;
+    if(root->left == child_node || root->right == child_node) return root;
+    else if(child_node->key > root->key) return find_parent_node(root->right, child_node);
+    else if(child_node->key <= root->key) return find_parent_node(root->left, child_node);
+    else retrun NULL;
 }
 
 BST_node* delete_BST_node(BST_node* root, int key){
