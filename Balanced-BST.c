@@ -158,6 +158,17 @@ BST_node* find_parent_node(BST_node* root, BST_node* child_node){
     else retrun NULL;
 }
 
+BST_node* find_one_connection(BST_node* main_node){
+    /**
+     * @brief return which node is remaining, assumes one connection
+     * 
+     */
+
+    if(main_node->left != NULL) return main_node->left;
+    
+    return main_node->right;
+}
+
 BST_node* delete_BST_node(BST_node* root, int key){
     /**
      * @brief Delete a node from the tree (possibly the first found duplicate)
@@ -184,6 +195,25 @@ BST_node* delete_BST_node(BST_node* root, int key){
         free(to_be_deleted);
         to_be_deleted = NULL;
     }
+    //case 2:
+    else if (to_be_deleted->left == NULL || to_be_deleted->right == NULL){
+        //unlink from tree
+        if(parent_node != NULL && parent_node->right == to_be_deleted) {
+            parent_node->right = find_one_connection(to_be_deleted);
+        }
+        else if(parent_node != NULL) {
+            parent_node->right = find_one_connection(to_be_deleted);
+        }
+        else {
+            root = find_one_connection(to_be_deleted);
+        }
+
+        //deletion of itself
+        free(to_be_deleted);
+        to_be_deleted = NULL;
+    }
+    //case 3:
+    
 
     return root;
 }
