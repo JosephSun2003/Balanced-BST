@@ -227,3 +227,21 @@ void print_node_in_order(BST_node* root, int level){
         print_node_in_order(root->right, level + 1);
     }
 }
+void print_node_pre_order(BST_node* root, int level){
+    printf("node: %d at level %d.", root->key , level);
+    if(root->left != NULL){
+        print_node_in_order(root->left, level + 1);
+    }
+    if(root->right != NULL){
+        print_node_in_order(root->right, level + 1);
+    }
+}
+void print_node_post_order(BST_node* root, int level){
+    if(root->left != NULL){
+        print_node_in_order(root->left, level + 1);
+    }
+    if(root->right != NULL){
+        print_node_in_order(root->right, level + 1);
+    }
+    printf("node: %d at level %d.", root->key , level);
+}
