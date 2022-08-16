@@ -213,7 +213,17 @@ BST_node* delete_BST_node(BST_node* root, int key){
         to_be_deleted = NULL;
     }
     //case 3:
-    
+
 
     return root;
+}
+
+void print_node_in_order(BST_node* root, int level){
+    if(root->left != NULL){
+        print_node_in_order(root->left, level + 1);
+    }
+    printf("node: %d at level %d.", root->key , level);
+    if(root->right != NULL){
+        print_node_in_order(root->right, level + 1);
+    }
 }
