@@ -198,22 +198,31 @@ BST_node* delete_BST_node(BST_node* root, int key){
     //case 2:
     else if (to_be_deleted->left == NULL || to_be_deleted->right == NULL){
         //unlink from tree
-        if(parent_node != NULL && parent_node->right == to_be_deleted) {
+        //right branch
+        if(parent_node != NULL && parent_node->right == to_be_deleted){
             parent_node->right = find_one_connection(to_be_deleted);
         }
+        //left branch
         else if(parent_node != NULL) {
-            parent_node->right = find_one_connection(to_be_deleted);
+            parent_node->left = find_one_connection(to_be_deleted);
         }
+        //if the root is being deleted
         else {
             root = find_one_connection(to_be_deleted);
         }
 
-        //deletion of itself
+        //deletion of the node
         free(to_be_deleted);
         to_be_deleted = NULL;
     }
     //case 3:
+    else{
+        BST_node* replacement = find_replacement(to_be_deleted->right);
+        to_be_deleted->key = replacement->key; //change the key (swap the data)
+        to_be_deleted->right = delete_BST_node(to_be_deleted->right, replacement->key); //recursion (call to delete the replacement node)
 
+        balance(root); //rebalance the tree (not the shape but the data)
+    }
 
     return root;
 }
