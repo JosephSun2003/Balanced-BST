@@ -181,6 +181,10 @@ BST_node* delete_BST_node(BST_node* root, int key){
 
     //search section
     BST_node* to_be_deleted = search_for(root, key);
+
+    //if nodes does not exist
+    if(to_be_deleted == NULL) return root;
+
     BST_node* parent_node = NULL;
     if(root != to_be_deleted) parent_node = find_parent_node(root, to_be_deleted);
     //case 1:
@@ -227,7 +231,7 @@ BST_node* delete_BST_node(BST_node* root, int key){
     return root;
 }
 
-void print_node_in_order(BST_node* root, int level){
+void print_BST_in_order(BST_node* root, int level){
     if(root->left != NULL){
         print_node_in_order(root->left, level + 1);
     }
@@ -236,7 +240,7 @@ void print_node_in_order(BST_node* root, int level){
         print_node_in_order(root->right, level + 1);
     }
 }
-void print_node_pre_order(BST_node* root, int level){
+void print_BST_pre_order(BST_node* root, int level){
     printf("node: %d at level %d.", root->key , level);
     if(root->left != NULL){
         print_node_in_order(root->left, level + 1);
@@ -245,7 +249,7 @@ void print_node_pre_order(BST_node* root, int level){
         print_node_in_order(root->right, level + 1);
     }
 }
-void print_node_post_order(BST_node* root, int level){
+void print_BST_post_order(BST_node* root, int level){
     if(root->left != NULL){
         print_node_in_order(root->left, level + 1);
     }
@@ -253,4 +257,18 @@ void print_node_post_order(BST_node* root, int level){
         print_node_in_order(root->right, level + 1);
     }
     printf("node: %d at level %d.", root->key , level);
+}
+
+BST_node* delete_BST(BST_node* root){
+    /**
+     * @brief delete tree
+     * 
+     */
+
+    if(root->left != NULL) root->left = delete_BST(root->left);
+    if(root->right != NULL) root->right = delete_BST(root->right);
+
+    root = delete_BST_node(root, root->key);
+
+    return root;
 }
