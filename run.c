@@ -62,4 +62,6 @@ int main()
             printf("Command not recognised. \n");
         }
     }
+
+    return 0; //main finished
 }
