@@ -10,30 +10,56 @@ int main()
 
     while (choice != 6){
         printf("Please select from among the following options:\n");
-        printf("0 - Insert new note\n");
-        printf("1 - Search for note\n");
-        printf("2 - Delete note\n");
-        printf("3 - Print notes in order\n");
-        printf("4 - Print notes in pre-order\n");
-        printf("5 - Print notes in post-order\n");
+        printf("0 - Insert new node\n");
+        printf("1 - Search for node\n");
+        printf("2 - Delete node\n");
+        printf("3 - Print nodes in order\n");
+        printf("4 - Print nodes in pre-order\n");
+        printf("5 - Print nodes in post-order\n");
         printf("6 - Delete BST and exit\n");
 
         scanf("%d",&choice); //input proccessing
         getchar();// deal with  \n
         
-        if(choice == 1){
+        if (choice == 0){
+            int key = 0;
+            scanf("Value of the node: %d", &key);
+            root = insert_node(root, new_BST_Node(key));
+        }
+        else if(choice == 1){
             int value = 0;
             scanf("Value of the node: %d", &value);
             getchar();
-            if(root != NULL){
-                search_for(root, value);
+            if(root != NULL){ //if the root exists (AKA a tree exists)
+                BST_node* found_node = search_for(root, value);
+                if(found_node == NULL) printf("Node not found. \n"); //if the node is non-existent
+                else{
+                    printf("Node found!\n");
+                    printf("Node key: %d\n", found_node->key);
+                }
             }
             else{
                 printf("error, no tree created, yet. \n");
             }
         }
+        else if (choice == 2){
+            int desired_key = 0;
+            scanf("Value of node to-be-deleted: %d", &desired_key);
+            getchar();
+            if(root == NULL) printf("Tree does not exist. \n");
+            else root = delete_BST_node(root, desired_key);
+        }
+        else if (choice == 3) print_BST_in_order(root, 1);
+        else if (choice == 4) print_BST_pre_order(root, 1);
+        else if (choice == 5) print_BST_post_order(root, 1);
+        else if (choice == 6){
+
+            if(root != NULL) root = delete_BST(root);
+            printf("BST Deleted. \n");
+
+        }
         else{
-            printf("Command does not exist. \n");
+            printf("Command not recognised. \n");
         }
     }
 }
