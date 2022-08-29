@@ -119,6 +119,10 @@ BST_node *insert_node(BST_node *root, BST_node *new_node){
      * - make a queue
      * - check for the first available space from left to right, visually speaking
      * */
+
+    //starting the tree
+    if(root == NULL) return new_node;
+
     Queue_node* head = new_queue_node(root);
     BST_node* current = root;
     while(current->right != NULL && current->left != NULL){
@@ -235,13 +239,13 @@ void print_BST_in_order(BST_node* root, int level){
     if(root->left != NULL){
         print_BST_in_order(root->left, level + 1);
     }
-    printf("node: %d at level %d.", root->key , level);
+    printf("node: %d at level %d.\n", root->key , level);
     if(root->right != NULL){
         print_BST_in_order(root->right, level + 1);
     }
 }
 void print_BST_pre_order(BST_node* root, int level){
-    printf("node: %d at level %d.", root->key , level);
+    printf("node: %d at level %d.\n", root->key , level);
     if(root->left != NULL){
         print_BST_pre_order(root->left, level + 1);
     }
@@ -256,7 +260,7 @@ void print_BST_post_order(BST_node* root, int level){
     if(root->right != NULL){
         print_BST_post_order(root->right, level + 1);
     }
-    printf("node: %d at level %d.", root->key , level);
+    printf("node: %d at level %d.\n", root->key , level);
 }
 
 BST_node* delete_BST(BST_node* root){

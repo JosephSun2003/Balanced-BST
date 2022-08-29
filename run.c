@@ -1,5 +1,7 @@
 //gonna copy a lot of code from the BST Assignment from CSCA48
 
+#include<stdlib.h>
+#include<stdio.h>
 #include<string.h>
 #include"Balanced-BST.c"
 
@@ -18,17 +20,19 @@ int main()
         printf("5 - Print nodes in post-order\n");
         printf("6 - Delete BST and exit\n");
 
-        scanf("%d",&choice); //input proccessing
-        getchar();// deal with  \n
+        scanf("%d", &choice); //input proccessing
+        getchar();
         
         if (choice == 0){
             int key = 0;
-            scanf("Value of the node: %d", &key);
+            printf("Value of the new node: \n");
+            scanf("%d", &key);
             root = insert_node(root, new_BST_Node(key));
         }
         else if(choice == 1){
             int value = 0;
-            scanf("Value of the node: %d", &value);
+            printf("Value of the node: \n");
+            scanf("%d", &value);
             getchar();
             if(root != NULL){ //if the root exists (AKA a tree exists)
                 BST_node* found_node = search_for(root, value);
@@ -44,7 +48,8 @@ int main()
         }
         else if (choice == 2){
             int desired_key = 0;
-            scanf("Value of node to-be-deleted: %d", &desired_key);
+            printf("Value of the desired key: \n");
+            scanf("%d", &desired_key);
             getchar();
             if(root == NULL) printf("Tree does not exist. \n");
             else root = delete_BST_node(root, desired_key);
