@@ -44,7 +44,7 @@ BST_node *balance(BST_node *root){
     /**
      * Function Notes:
      * Recusrion can be used, although tail recursion should be done if possible (unlikely will given the algorithm implemented)
-     * Post-order operation (left, centre, right)
+     * Post-order operation (left, right, centre)
      * Switching of data, not the node itself (too messy)
      * Assumption of duplicates
      */
@@ -137,9 +137,8 @@ BST_node *insert_node(BST_node *root, BST_node *new_node){
     else{
         current->right = new_node;
     }
-    root = balance(root);
 
-    return root;
+    return balance(root);
 }
 
 BST_node* find_replacement(BST_node* root){
